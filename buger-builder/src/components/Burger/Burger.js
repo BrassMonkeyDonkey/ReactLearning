@@ -4,9 +4,14 @@ import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredients/BurgerIngredients';
 
 const Burger = (props) => {
-    const ingredients = Object.keys(props.ingredients)
+    let ingredients = Object.keys(props.ingredients)
                               .map(ingredientKey => [...Array(props.ingredients[ingredientKey])]
-                                    .map((_, index) => <BurgerIngredient key={ingredientKey + index} type={ingredientKey} />));
+                                    .map((_, index) => <BurgerIngredient key={ingredientKey + index} type={ingredientKey} />))
+                                        .reduce((arr, el) => { return arr.concat(el); }, []);
+
+    if(ingredients.length === 0) {
+        ingredients = <p>Please start adding ingredients!</p>
+    }
 
     return (
         <div className={classes.Burger}>
