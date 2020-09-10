@@ -19,7 +19,18 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0,
         },
-        totalPrice: 4
+        totalPrice: 4,
+        purchasable: false
+    }
+
+    updatePurchasableState(Ingredients) {
+        const sum = Object.keys(Ingredients)
+                          .map(igKey => Ingredients[igKey])
+                          .reduce((sum, el) => sum + el);
+
+        this.setState({
+            purchasable: sum > 0
+        })
     }
 
     addedIngredientHandler = (type) => {        
@@ -28,15 +39,11 @@ class BurgerBuilder extends Component {
 
         const newPrice = this.state.totalPrice + INGREDIENTS_PRICE[type];
 
-        console.log(this.state.ingredients);
-        console.log(updatedIngredients);
-
-        console.log(this.state.totalPrice);
-        console.log(newPrice);
         this.setState({
             ingredients: updatedIngredients,
             totalPrice: newPrice
         });
+        this.updatePurchasableState(updatedIngredients);
     };
 
     removedIngredientHandler = (type) => {        
@@ -49,15 +56,11 @@ class BurgerBuilder extends Component {
 
         const newPrice = this.state.totalPrice - INGREDIENTS_PRICE[type];
 
-        console.log(this.state.ingredients);
-        console.log(updatedIngredients);
-
-        console.log(this.state.totalPrice);
-        console.log(newPrice);
         this.setState({
             ingredients: updatedIngredients,
             totalPrice: newPrice
         });
+        this.updatePurchasableState(updatedIngredients);
     };
 
     render() {
@@ -76,7 +79,8 @@ class BurgerBuilder extends Component {
                     addedIngredient={this.addedIngredientHandler}
                     removedIngredient={this.removedIngredientHandler}
                     removeButtonDisabled={disabledInfo}
-                    price={this.state.totalPrice} />
+                    price={this.state.totalPrice}
+                    purchasable={this.state.purchasable} />
             </Auxiliary>
         );
     }
