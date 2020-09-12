@@ -5,14 +5,16 @@ import Logo from "../../Logo/Logo";
 import NavigationItems from "../NavigationItems/NavigationItems";
 
 const sideDrawer = (props) => {
-    return (
-        <div className={classes.SideDrawer}>
-            <Logo />
-            <nav>
-                <NavigationItems />
-            </nav>
-        </div>
-    )
+  return (
+    <div className={classes.SideDrawer}>
+      <div className={classes.Logo}>
+        <Logo />
+      </div>
+      <nav>
+        <NavigationItems />
+      </nav>
+    </div>
+  );
 };
 
 export default sideDrawer;
