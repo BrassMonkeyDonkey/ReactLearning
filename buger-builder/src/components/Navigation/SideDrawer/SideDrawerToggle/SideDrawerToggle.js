@@ -1,7 +1,18 @@
 import React from "react";
 
+import classes from "./SideDrawerToggle.module.css";
+
 const sideDrawerToggle = (props) => {
-  return <div onClick={props.sideDrawerToggleClicked}>MENU</div>;
+  return (
+    <div
+      className={classes.DrawerToggle}
+      onClick={props.sideDrawerToggleClicked}
+    >
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  );
 };
 
 export default sideDrawerToggle;
