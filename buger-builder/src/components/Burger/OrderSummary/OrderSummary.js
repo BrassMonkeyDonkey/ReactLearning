@@ -10,7 +10,7 @@ const OrderSummary = (props) => {
     return (
       <li>
         <p>
-          <stan style={{ textTransform: "capitalized" }}>{igKey}:</stan>{" "}
+          <span style={{ textTransform: "capitalized" }}>{igKey}:</span>{" "}
           {props.ingredients[igKey]}
         </p>
       </li>
