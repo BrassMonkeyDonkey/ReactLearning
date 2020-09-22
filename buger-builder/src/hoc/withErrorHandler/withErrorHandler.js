@@ -5,15 +5,8 @@ import Modal from "../../components/UI/Modal/Modal";
 
 const withErrorHandler = (WrappedComponent, axios) => {
     return class extends Component {
-        state = {
-            error: null
-        }
-
-        errorHandledConfirmed = () => {
-            this.setState({error: null});
-        };
-
-        componentDidMount() {
+        constructor(props) {
+            super();
             axios.interceptors.response.use(res => res, error => {
                 this.setState({error: error});
             });
@@ -23,6 +16,14 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 return request;
             });
         }
+
+        state = {
+            error: null
+        }
+
+        errorHandledConfirmed = () => {
+            this.setState({error: null});
+        };
 
         render() {
             return(
