@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Auxiliary from "../../hoc/Auxiliary";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
@@ -96,7 +97,7 @@ class BurgerBuilder extends Component {
     }
 
     // the ".json" is requiered by Firebase. It is how it is working to automatically handle new "document" creation.
-    axios.post("/orders.json/", order)
+    axios.post("/orders/", order)
     .then(response => this.setState({loading: false, purchased: false}))
     .catch(error => this.setState({loading: false, purchased: false}));
   };
@@ -141,4 +142,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder, axios);
